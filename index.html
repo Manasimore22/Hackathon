@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Transaction Monitoring</title>
+</head>
+<body>
+    <h1>Real-Time Transaction Monitoring</h1>
+   
+    <form id="transactionForm">
+        <label for="account_number">Account Number:</label>
+        <input type="text" id="account_number" name="account_number" required><br>
+       
+        <label for="transaction_type">Transaction Type:</label>
+        <input type="text" id="transaction_type" name="transaction_type" required><br>
+       
+        <label for="transaction_amount">Transaction Amount:</label>
+        <input type="number" id="transaction_amount" name="transaction_amount" required><br>
+
+        <label for="old_balance">Old Balance:</label>
+        <input type="number" id="old_balance" name="old_balance" required><br>
+
+        <button type="button" onclick="makeTransaction()">Make Transaction</button>
+    </form>
+
+    <script>
+        function makeTransaction() {
+            const form = document.getElementById('transactionForm');
+            const formData = new FormData(form);
+
+            fetch('/make_transaction', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.is_fraud ? 'Fraudulent Transaction Detected!' : 'Transaction Successful!');
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
