@@ -1,45 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Transaction Monitoring</title>
+    <title>Financial Fraud Detection System</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Your existing styles remain unchanged */
+
+        .content img {
+            margin: 20px auto; /* Adjusted margin for centering */
+            display: block;
+            width: 200px; /* Adjusted width of the image */
+            height: auto; /* Maintaining aspect ratio */
+        }
+        .registration-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f3f0f0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        #confirmation-message {
+            color: green;
+            margin-top: 10px;
+        }
+
+        .menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .menu li {
+            margin: 0 15px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #fff; /* Set text color to white */
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .menu a:hover {
+            color: #007bff; /* Set hover color to the desired color */
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Real-Time Transaction Monitoring</h1>
-   
-    <form id="transactionForm">
-        <label for="account_number">Account Number:</label>
-        <input type="text" id="account_number" name="account_number" required><br>
-       
-        <label for="transaction_type">Transaction Type:</label>
-        <input type="text" id="transaction_type" name="transaction_type" required><br>
-       
-        <label for="transaction_amount">Transaction Amount:</label>
-        <input type="number" id="transaction_amount" name="transaction_amount" required><br>
 
-        <label for="old_balance">Old Balance:</label>
-        <input type="number" id="old_balance" name="old_balance" required><br>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">SecureSpan</h2> <!-- Adjusted logo name -->
+            </div>
 
-        <button type="button" onclick="makeTransaction()">Make Transaction</button>
-    </form>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="service.html">SERVICES</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                   
+                </ul>
+            </div>
+        </div> 
 
-    <script>
-        function makeTransaction() {
-            const form = document.getElementById('transactionForm');
-            const formData = new FormData(form);
+        <div class="content" id="content-container">
+            <h1>Financial Fraud Detection <br><span>System for Police</span></h1>
+            <img src="Rajasthan_Police_Logo.png" alt="Rajasthan Police Logo" width="200">
+            <div class="form">
+                <h2>Login Here</h2>
+                <input type="text" name="policeID" placeholder="Enter Police ID Here">
+                <input type="password" name="password" placeholder="Enter Password Here">
+                <button class="btnn" onclick="redirectToLogin()">Login</button>
+                <div class="icons">
+                    <!-- Social media icons remain unchanged -->
+                </div> 
+                <p class="link">Don't have an account<br>
+                    <a href="#" onclick="loadRegistrationForm()">Sign up</a> here</p>
+            </div>
+        </div>
+        
+        <div class="registration-form" id="dynamic-form">
+            <!-- This is where the registration form will be inserted -->
+        </div>
+        <p id="confirmation-message"></p>
+        <script>
+            function redirectToLogin() {
+                try {
+                    var policeID = document.querySelector('input[name="policeID"]').value;
+                    var password = document.querySelector('input[name="password"]').value;
 
-            fetch('/make_transaction', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.is_fraud ? 'Fraudulent Transaction Detected!' : 'Transaction Successful!');
-            })
-            .catch(error => console.error('Error:', error));
-        }
-    </script>
+                    // Check if the provided data is in the CSV file (policedata.csv)
+                    // Assuming you have a function 'checkCredentials' that returns true if valid
+                    checkCredentials(policeID, password);
+                } catch (error) {
+                    console.error('Error redirecting to login:', error);
+                }
+            }
+
+            function checkCredentials(policeID, password) {
+                // Fetch policedata.csv and perform validation
+                fetch('policedata.csv')
+                    .then(response => response.text())
+                    .then(data => {
+                        var csvData = data.split('\n');
+                        var headers = csvData[0].split(',');
+                        var isValid = false;
+
+                        for (var i = 1; i < csvData.length; i++) {
+                            var row = csvData[i].split(',');
+                            if (row[headers.indexOf("Police ID")] === policeID && row[headers.indexOf("Password")] === password) {
+                                isValid = true;
+                                break;
+                            }
+                        }
+
+                        if (isValid) {
+                            var confirmationMessage = document.getElementById('confirmation-message');
+                            confirmationMessage.innerHTML = "Login successfully!";
+                            confirmationMessage.style.display = 'block';
+
+                            // Redirect to indexj.html after successful login
+                            window.location.href = "indexj.html";
+                        } else {
+                            alert("Invalid Police ID or Password. Please try again.");
+                        }
+                    })
+                    .catch(error => console.error('Error fetching policedata.csv:', error));
+            }
+
+            function loadRegistrationForm() {
+                var registrationFormContainer = document.getElementById('dynamic-form');
+                fetch("indexf.html")
+                    .then(response => response.text())
+                    .then(html => {
+                        registrationFormContainer.innerHTML = html;
+                        registrationFormContainer.style.display = 'block';
+                    })
+                    .catch(error => console.error('Error loading registration form:', error));
+            }
+        </script>
+
+    </div>
+
 </body>
 </html>

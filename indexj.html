@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #f0f0f0; /* Set your desired background color */
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            flex-direction: column; /* Center items vertically */
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 30px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid #3498db;
+            color: #3498db;
+            border-radius: 10px;
+            background-color: #fff;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+            margin: 20px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .button:hover {
+            background-color: #3498db;
+            color: #fff;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            width: 70px; /* Set the desired width */
+            height: auto;
+            display: block;
+            margin: 0 auto 10px; /* Center the logo above the button */
+        }
+
+        .options-container {
+            display: none;
+            text-align: center;
+        }
+
+        .option {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid #3498db;
+            color: #3498db;
+            border-radius: 5px;
+            background-color: #fff;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+            margin: 10px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .option:hover {
+            background-color: #3498db;
+            color: #fff;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    <title>Aesthetic Buttons</title>
+</head>
+
+<body>
+    <div class="button-container">
+        <div class="button" onclick="openOptionsPage()">
+            <img src="realtime.png" alt="Logo" class="logo">
+            Real-Time Transaction Monitoring
+        </div>
+        <a href="fake_accounts_only.csv" class="button">
+            <img src="images.jpeg" alt="Logo" class="logo">
+            Fake Bank Account Detection
+        </a>
+        <a href="javascript:void(0);" class="button" onclick="openVisuPy()">
+            <img src="mf.jpeg" alt="Logo" class="logo">
+            Money Flow Visualization
+        </a>
+    </div>
+
+    <!-- Your existing Streamlit embedding script -->
+    <script>
+        function openOptionsPage() {
+            // Replace 'options-page.html' with the appropriate path to your options page
+            window.location.href = 'options-page.html';
+        }
+
+        function openVisuPy() {
+            // Replace 'http://localhost:8501' with the appropriate URL of your Streamlit app
+            var streamlitAppURL = 'http://localhost:8501';
+            window.open(streamlitAppURL, '_blank');
+        }
+    </script>
+</body>
+
+</html>

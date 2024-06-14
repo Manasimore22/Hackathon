@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>FAQs - Financial Fraud Detection System for Police</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .menu li {
+            margin: 0 15px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .menu a:hover {
+            color: #f5f5f5;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .faq-list {
+            margin-top: 20px;
+        }
+
+        .faq {
+            margin-bottom: 20px;
+        }
+
+        .faq p {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .registration-form {
+            display: none;
+        }
+
+        #confirmation-message {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="navbar">
+            <div class="icon"></div>
+            
+        </div>
+
+        <div class="content">
+            <h1>Frequently Asked Questions</h1>
+            <div class="faq-list">
+                <div class="faq">
+                    <p><strong>Q: What is a Financial Fraud Detection System for Police?</strong></p>
+                    <p>A: A Financial Fraud Detection System for Police is a sophisticated software solution designed to identify and prevent fraudulent activities related to financial transactions. It empowers law enforcement agencies to proactively combat financial crimes.</p>
+                </div>
+
+                <div class="faq">
+                    <p><strong>Q: How does the system benefit law enforcement?</strong></p>
+                    <p>A: The system provides law enforcement with advanced tools and analytics to detect patterns indicative of financial fraud. It helps in early detection, investigation, and prevention of fraudulent activities, thereby enhancing the overall efficiency of law enforcement efforts.</p>
+                </div>
+
+                <div class="faq">
+                    <p><strong>Q: What types of financial fraud can the system detect?</strong></p>
+                    <p>A: The system can detect various forms of financial fraud, including but not limited to identity theft, embezzlement, money laundering, and fraudulent transactions. Its adaptive algorithms can identify suspicious patterns in large datasets.</p>
+                </div>
+
+                <div class="faq">
+                    <p><strong>Q: Is the system customizable for different police departments?</strong></p>
+                    <p>A: Yes, the system is designed to be customizable to meet the specific needs and requirements of different police departments. It can be configured to adapt to various scales, types of financial fraud, and jurisdictional requirements.</p>
+                </div>
+
+               
+            </div>
+        </div>
+
+        <div class="registration-form" id="dynamic-form">
+            <!-- This is where the registration form will be inserted -->
+        </div>
+        <p id="confirmation-message"></p>
+        <script>
+            function loadFAQs() {
+                var contentContainer = document.querySelector('.faq-list');
+                fetch("faq.html")
+                    .then(response => response.text())
+                    .then(html => {
+                        contentContainer.innerHTML = html;
+                    })
+                    .catch(error => console.error('Error loading FAQs:', error));
+            }
+        </script>
+    </body>
+
+</html>
